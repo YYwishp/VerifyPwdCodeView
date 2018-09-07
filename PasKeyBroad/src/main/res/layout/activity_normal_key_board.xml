@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="#efefef"
+               >
+
+
+    <EditText
+        android:id="@+id/textAmount"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:inputType="numberDecimal"
+        android:padding="14dp"
+        android:textColor="#333333"
+        android:visibility="gone"
+        android:textSize="16sp" />
+
+
+
+
+    <Button
+        android:layout_marginTop="70dp"
+        android:onClick="showToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.lnyp.pswkeyboard.widget.VirtualKeyboardView
+        android:id="@+id/virtualKeyboardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+</RelativeLayout>
