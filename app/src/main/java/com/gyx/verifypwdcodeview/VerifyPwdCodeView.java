@@ -43,7 +43,7 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 	 */
 	private boolean isCorner;
 	/**
-	 * 横向间距
+	 * 横向间隔
 	 */
 	private int widthSpace;
 	/**
@@ -51,11 +51,11 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 	 */
 	private int pwdType_CircleRadius;
 	/**
-	 * 纵向间距
+	 * 纵向间隔
 	 */
 	private int heightSpace;
 	/**
-	 * 密码框的宽度
+	 * 密码框的整体 宽度
 	 */
 	private int rectStroke;
 	/**
@@ -370,22 +370,103 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 				list.add(rect);
 				if (isCorner) {
 					Path path = new Path();
-					path.moveTo(i * width + widthSpace, heightSpace + radian);
-					path.quadTo(i * width + widthSpace, heightSpace, i * width + widthSpace + radian, heightSpace);
-					path.lineTo(i * width + width - widthSpace - radian, heightSpace);
-					path.quadTo(i * width + width - widthSpace, heightSpace, i * width + width - widthSpace, heightSpace + radian);
-					path.lineTo(i * width + width - widthSpace, width - heightSpace - radian);
-					path.quadTo(i * width + width - widthSpace, width - heightSpace, i * width + width - widthSpace - radian, width - heightSpace);
-					path.lineTo(i * width + widthSpace + radian, width - heightSpace);
-					path.quadTo(i * width + widthSpace, width - heightSpace, i * width + widthSpace, width - heightSpace - radian);
-					path.lineTo(i * width + widthSpace, heightSpace + radian);
-					//画出带圆角矩形的实心体
-					canvas.drawPath(path, rectPaint);
-					//画出带圆角矩形的边框
-					canvas.drawPath(path, borderPaint);
+					if (widthSpace > 0) {
+						//左上角圆角，开始
+						path.moveTo(i * width + widthSpace, heightSpace + radian);
+						path.quadTo(i * width + widthSpace, heightSpace, i * width + widthSpace + radian, heightSpace);
+						path.lineTo(i * width + width - widthSpace - radian, heightSpace);
+						path.quadTo(i * width + width - widthSpace, heightSpace, i * width + width - widthSpace, heightSpace + radian);
+						path.lineTo(i * width + width - widthSpace, width - heightSpace - radian);
+						path.quadTo(i * width + width - widthSpace, width - heightSpace, i * width + width - widthSpace - radian, width - heightSpace);
+						path.lineTo(i * width + widthSpace + radian, width - heightSpace);
+						path.quadTo(i * width + widthSpace, width - heightSpace, i * width + widthSpace, width - heightSpace - radian);
+						path.lineTo(i * width + widthSpace, heightSpace + radian);
+						//画出带圆角矩形的实心体
+						canvas.drawPath(path, rectPaint);
+						//画出带圆角矩形的边框
+						canvas.drawPath(path, borderPaint);
+					} else {
+						if (i == 0) {
+							path.moveTo(i * width + widthSpace, heightSpace + radian);
+							path.quadTo(i * width + widthSpace, heightSpace, i * width + widthSpace + radian, heightSpace);
+							path.lineTo(i * width + width - widthSpace - radian, heightSpace);
+							path.quadTo(i * width + width - widthSpace, heightSpace, i * width + width - widthSpace, heightSpace + radian);
+							path.lineTo(i * width + width - widthSpace, width - heightSpace - radian);
+							path.quadTo(i * width + width - widthSpace, width - heightSpace, i * width + width - widthSpace - radian, width - heightSpace);
+							path.lineTo(i * width + widthSpace + radian, width - heightSpace);
+							path.quadTo(i * width + widthSpace, width - heightSpace, i * width + widthSpace, width - heightSpace - radian);
+							path.lineTo(i * width + widthSpace, heightSpace + radian);
+						} else {
+							path.moveTo(i * width + widthSpace, heightSpace + radian);
+							path.quadTo(i * width + widthSpace, heightSpace, i * width + widthSpace + radian, heightSpace);
+							path.lineTo(i * width + width - widthSpace - radian, heightSpace);
+							path.quadTo(i * width + width - widthSpace, heightSpace, i * width + width - widthSpace, heightSpace + radian);
+							path.lineTo(i * width + width - widthSpace, width - heightSpace - radian);
+							path.quadTo(i * width + width - widthSpace, width - heightSpace, i * width + width - widthSpace - radian, width - heightSpace);
+							path.lineTo(i * width + widthSpace + radian, width - heightSpace);
+							path.quadTo(i * width + widthSpace, width - heightSpace, i * width + widthSpace, width - heightSpace - radian);
+							//path.lineTo(i * width + widthSpace, heightSpace + radian);当widthSpace==0的时候，最后一个竖线不用画，否则重叠
+						}
+
+						//画出带圆角矩形的实心体
+						canvas.drawPath(path, rectPaint);
+						//画出带圆角矩形的边框
+						canvas.drawPath(path, borderPaint);
+					}
+
 				} else {
 					//普通矩形
-					canvas.drawRect(rect, rectPaint);
+					//canvas.drawRect(rect, borderPaint);
+
+					Path path = new Path();
+					if (widthSpace > 0) {
+
+						path.moveTo(i * width + widthSpace, heightSpace);
+						//path.quadTo(i * width + widthSpace, heightSpace, i * width + widthSpace + radian, heightSpace);
+						path.lineTo(i * width + width - widthSpace , heightSpace);
+						//path.quadTo(i * width + width - widthSpace, heightSpace, i * width + width - widthSpace, heightSpace + radian);
+						path.lineTo(i * width + width - widthSpace, width - heightSpace );
+						//path.quadTo(i * width + width - widthSpace, width - heightSpace, i * width + width - widthSpace - radian, width - heightSpace);
+						path.lineTo(i * width + widthSpace, width - heightSpace);
+						//path.quadTo(i * width + widthSpace, width - heightSpace, i * width + widthSpace, width - heightSpace - radian);
+						path.lineTo(i * width + widthSpace, heightSpace);
+						/*//画出矩形的实心体
+						canvas.drawPath(path, rectPaint);
+						//画出矩形的边框
+						canvas.drawPath(path, borderPaint);*/
+					} else {
+						if (i == 0) {
+							path.moveTo(i * width + widthSpace, heightSpace);
+							//path.quadTo(i * width + widthSpace, heightSpace, i * width + widthSpace + radian, heightSpace);
+							path.lineTo(i * width + width - widthSpace , heightSpace);
+							//path.quadTo(i * width + width - widthSpace, heightSpace, i * width + width - widthSpace, heightSpace + radian);
+							path.lineTo(i * width + width - widthSpace, width - heightSpace );
+							//path.quadTo(i * width + width - widthSpace, width - heightSpace, i * width + width - widthSpace - radian, width - heightSpace);
+							path.lineTo(i * width + widthSpace , width - heightSpace);
+							//path.quadTo(i * width + widthSpace, width - heightSpace, i * width + widthSpace, width - heightSpace - radian);
+							path.lineTo(i * width + widthSpace, heightSpace);
+						} else {
+							path.moveTo(i * width + widthSpace, heightSpace);
+							//path.quadTo(i * width + widthSpace, heightSpace, i * width + widthSpace + radian, heightSpace);
+							path.lineTo(i * width + width - widthSpace , heightSpace);
+							//path.quadTo(i * width + width - widthSpace, heightSpace, i * width + width - widthSpace, heightSpace + radian);
+							path.lineTo(i * width + width - widthSpace, width - heightSpace );
+							//path.quadTo(i * width + width - widthSpace, width - heightSpace, i * width + width - widthSpace - radian, width - heightSpace);
+							path.lineTo(i * width + widthSpace , width - heightSpace);
+							//path.quadTo(i * width + widthSpace, width - heightSpace, i * width + widthSpace, width - heightSpace - radian);
+							//path.lineTo(i * width + widthSpace, heightSpace);
+						}
+
+
+					}
+
+					//画出矩形的实心体
+					canvas.drawPath(path, rectPaint);
+					//画出矩形的边框
+					canvas.drawPath(path, borderPaint);
+
+
+
 				}
 				if (isNeedDash) {
 					//最后一个画虚线
@@ -439,22 +520,109 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 				list.add(rect);
 				if (isCorner) {
 					Path path = new Path();
-					path.moveTo((numLength - 1 - i) * width + widthSpace, heightSpace + radian);
-					path.quadTo((numLength - 1 - i) * width + widthSpace, heightSpace, (numLength - 1 - i) * width + widthSpace + radian, heightSpace);
-					path.lineTo((numLength - i) * width - widthSpace - radian, heightSpace);
-					path.quadTo((numLength - i) * width - widthSpace, heightSpace, (numLength - i) * width - widthSpace, heightSpace + radian);
-					path.lineTo((numLength - i) * width - widthSpace, width - heightSpace - radian);
-					path.quadTo((numLength - i) * width - widthSpace, width - heightSpace, (numLength - i) * width - widthSpace - radian, width - heightSpace);
-					path.lineTo((numLength - 1 - i) * width + widthSpace + radian, width - heightSpace);
-					path.quadTo((numLength - 1 - i) * width + widthSpace, width - heightSpace, (numLength - 1 - i) * width + widthSpace, width - heightSpace - radian);
-					path.lineTo((numLength - 1 - i) * width + widthSpace, heightSpace + radian);
+					if (widthSpace >0) {
+						path.moveTo((numLength - 1 - i) * width + widthSpace, heightSpace + radian);
+						path.quadTo((numLength - 1 - i) * width + widthSpace, heightSpace, (numLength - 1 - i) * width + widthSpace + radian, heightSpace);
+						path.lineTo((numLength - i) * width - widthSpace - radian, heightSpace);
+						path.quadTo((numLength - i) * width - widthSpace, heightSpace, (numLength - i) * width - widthSpace, heightSpace + radian);
+						path.lineTo((numLength - i) * width - widthSpace, width - heightSpace - radian);
+						path.quadTo((numLength - i) * width - widthSpace, width - heightSpace, (numLength - i) * width - widthSpace - radian, width - heightSpace);
+						path.lineTo((numLength - 1 - i) * width + widthSpace + radian, width - heightSpace);
+						path.quadTo((numLength - 1 - i) * width + widthSpace, width - heightSpace, (numLength - 1 - i) * width + widthSpace, width - heightSpace - radian);
+						path.lineTo((numLength - 1 - i) * width + widthSpace, heightSpace + radian);
+					} else {
+						if (i == 0) {
+							path.moveTo((numLength - 1 - i) * width + widthSpace, heightSpace + radian);
+							path.quadTo((numLength - 1 - i) * width + widthSpace, heightSpace, (numLength - 1 - i) * width + widthSpace + radian, heightSpace);
+							path.lineTo((numLength - i) * width - widthSpace - radian, heightSpace);
+							path.quadTo((numLength - i) * width - widthSpace, heightSpace, (numLength - i) * width - widthSpace, heightSpace + radian);
+							path.lineTo((numLength - i) * width - widthSpace, width - heightSpace - radian);
+							path.quadTo((numLength - i) * width - widthSpace, width - heightSpace, (numLength - i) * width - widthSpace - radian, width - heightSpace);
+							path.lineTo((numLength - 1 - i) * width + widthSpace + radian, width - heightSpace);
+							path.quadTo((numLength - 1 - i) * width + widthSpace, width - heightSpace, (numLength - 1 - i) * width + widthSpace, width - heightSpace - radian);
+							path.lineTo((numLength - 1 - i) * width + widthSpace, heightSpace + radian);
+						} else {
+							path.moveTo((numLength - 1 - i) * width + widthSpace, heightSpace + radian);
+							path.quadTo((numLength - 1 - i) * width + widthSpace, heightSpace, (numLength - 1 - i) * width + widthSpace + radian, heightSpace);
+							path.lineTo((numLength - i) * width - widthSpace - radian, heightSpace);
+
+							path.quadTo((numLength - i) * width - widthSpace, heightSpace, (numLength - i) * width - widthSpace, heightSpace + radian);
+							//path.lineTo((numLength - i) * width - widthSpace, width - heightSpace - radian);
+							path.moveTo((numLength - i) * width - widthSpace,width - heightSpace - radian);
+
+
+							path.quadTo((numLength - i) * width - widthSpace, width - heightSpace, (numLength - i) * width - widthSpace - radian, width - heightSpace);
+							path.lineTo((numLength - 1 - i) * width + widthSpace + radian, width - heightSpace);
+							path.quadTo((numLength - 1 - i) * width + widthSpace, width - heightSpace, (numLength - 1 - i) * width + widthSpace, width - heightSpace - radian);
+							path.lineTo((numLength - 1 - i) * width + widthSpace, heightSpace + radian);
+						}
+
+					}
+
+
+
+
 					//画出带圆角矩形的实心体
 					canvas.drawPath(path, rectPaint);
 					//画出带圆角矩形的边框
 					canvas.drawPath(path, borderPaint);
 				}else {
 					//普通矩形
-					canvas.drawRect(rect, rectPaint);
+					//canvas.drawRect(rect, borderPaint);
+
+					Path path = new Path();
+					if (widthSpace > 0) {
+
+						path.moveTo((numLength - 1 - i) * width + widthSpace, heightSpace );
+						//path.quadTo((numLength - 1 - i) * width + widthSpace, heightSpace, (numLength - 1 - i) * width + widthSpace + radian, heightSpace);
+						path.lineTo((numLength - i) * width - widthSpace, heightSpace);
+						//path.quadTo((numLength - i) * width - widthSpace, heightSpace, (numLength - i) * width - widthSpace, heightSpace + radian);
+						path.lineTo((numLength - i) * width - widthSpace, width - heightSpace );
+						//path.quadTo((numLength - i) * width - widthSpace, width - heightSpace, (numLength - i) * width - widthSpace - radian, width - heightSpace);
+						path.lineTo((numLength - 1 - i) * width + widthSpace, width - heightSpace);
+						//path.quadTo((numLength - 1 - i) * width + widthSpace, width - heightSpace, (numLength - 1 - i) * width + widthSpace, width - heightSpace - radian);
+						path.lineTo((numLength - 1 - i) * width + widthSpace, heightSpace );
+						/*//画出矩形的实心体
+						canvas.drawPath(path, rectPaint);
+						//画出矩形的边框
+						canvas.drawPath(path, borderPaint);*/
+					} else {
+
+						if (i == 0) {
+							path.moveTo((numLength - 1 - i) * width + widthSpace, heightSpace );
+							//path.quadTo((numLength - 1 - i) * width + widthSpace, heightSpace, (numLength - 1 - i) * width + widthSpace + radian, heightSpace);
+							path.lineTo((numLength - i) * width - widthSpace , heightSpace);
+							//path.quadTo((numLength - i) * width - widthSpace, heightSpace, (numLength - i) * width - widthSpace, heightSpace + radian);
+							path.lineTo((numLength - i) * width - widthSpace, width - heightSpace );
+							//path.quadTo((numLength - i) * width - widthSpace, width - heightSpace, (numLength - i) * width - widthSpace - radian, width - heightSpace);
+							path.lineTo((numLength - 1 - i) * width + widthSpace , width - heightSpace);
+							//path.quadTo((numLength - 1 - i) * width + widthSpace, width - heightSpace, (numLength - 1 - i) * width + widthSpace, width - heightSpace - radian);
+							path.lineTo((numLength - 1 - i) * width + widthSpace, heightSpace );
+						} else {
+							/*path.moveTo((numLength - 1 - i) * width + widthSpace, heightSpace );
+							//path.quadTo((numLength - 1 - i) * width + widthSpace, heightSpace, (numLength - 1 - i) * width + widthSpace + radian, heightSpace);
+							path.lineTo((numLength - i) * width - widthSpace , heightSpace);
+
+							//path.quadTo((numLength - i) * width - widthSpace, heightSpace, (numLength - i) * width - widthSpace, heightSpace + radian);
+							//path.lineTo((numLength - i) * width - widthSpace, width - heightSpace - radian);
+							path.moveTo((numLength - i) * width - widthSpace,width - heightSpace );
+
+
+							//path.quadTo((numLength - i) * width - widthSpace, width - heightSpace, (numLength - i) * width - widthSpace - radian, width - heightSpace);
+							path.lineTo((numLength - 1 - i) * width + widthSpace , width - heightSpace);
+							//path.quadTo((numLength - 1 - i) * width + widthSpace, width - heightSpace, (numLength - 1 - i) * width + widthSpace, width - heightSpace - radian);
+							path.lineTo((numLength - 1 - i) * width + widthSpace, heightSpace );*/
+						}
+
+
+					}
+
+
+					//画出矩形的实心体
+					//canvas.drawPath(path, rectPaint);
+					//画出矩形的边框
+					canvas.drawPath(path, borderPaint);
+
 				}
 
 

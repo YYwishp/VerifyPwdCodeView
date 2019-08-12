@@ -23,26 +23,33 @@
             />
 
         <com.gyx.verifypwdcodeview.VerifyPwdCodeView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:id="@+id/password"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:layout_marginTop="10dp"
             app:autoCloseKeyBoard="true"
             app:bgFill="true"
-            app:broderColor="#f0f"
+            app:broderColor="#ff0f"
             app:broderWidth="1dp"
             app:dottedColor="#00f"
-            app:isCorner="true"
-            app:isNeedDash="true"
-            app:isPwd="false"
+            app:isCorner="false"
+            app:isNeedDash="false"
+            app:isPwd="true"
             app:numLength="6"
             app:rectChooseColor="#fff"
             app:rectNormalColor="#fff"
-            app:rectStroke="1px"
+            app:rectStroke="1dp"
             app:textColor="#000"
             app:txtSize="20sp"
+            app:widthSpace="0dp"
+            app:heightSpace="0dp"
+
             />
 
         <LinearLayout
