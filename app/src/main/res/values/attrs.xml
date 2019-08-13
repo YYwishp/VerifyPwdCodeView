@@ -49,4 +49,22 @@
 
 
 
+
+
+
+
+    <declare-styleable name="TestView">
+        <!--每个输入框的，宽高占位-->
+        <attr name="rectangleWidth" format="dimension" />
+        <attr name="rectangleHeight" format="dimension" />
+        <attr name="borderWidth" format="dimension" />
+
+
+
+    </declare-styleable>
+
+
+
+
+
 </resources>

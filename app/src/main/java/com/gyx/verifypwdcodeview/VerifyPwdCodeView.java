@@ -101,7 +101,7 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 	private float radian = 15;
 	private Paint borderPaint;
 	private Paint dottedPaint;
-	private int borderWidth;
+	private float borderWidth;
 	private boolean isNeedDash;
 	private onInputOverListener onInputOverListener;
 
@@ -216,7 +216,8 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 		//圆角边框颜色
 		broderColor = a.getColor(R.styleable.VerifyPwdCodeView_broderColor, 0xff666666);
 		//圆角边框厚度
-		borderWidth = a.getDimensionPixelSize(R.styleable.VerifyPwdCodeView_broderWidth, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
+		//borderWidth = a.getDimensionPixelSize(R.styleable.VerifyPwdCodeView_broderWidth, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
+		borderWidth = a.getDimension(R.styleable.VerifyPwdCodeView_broderWidth, (float) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
 		//虚线颜色
 		dottedColor = a.getColor(R.styleable.VerifyPwdCodeView_dottedColor, 0xff666666);
 		rectNormalColor = a.getColor(R.styleable.VerifyPwdCodeView_rectNormalColor, 0xff808080);
@@ -337,7 +338,7 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 					//原有宽度
 					widthSize = MeasureSpec.getSize(widthMeasureSpec);
 				} else {
-					widthSize = (heightSize - borderWidth) * numLength + borderWidth;
+					widthSize = (int) ((heightSize - borderWidth) * numLength + borderWidth);
 				}
 
 				System.out.println("宽度 AT_MOST--"+widthSize);
