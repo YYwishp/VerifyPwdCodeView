@@ -40,7 +40,7 @@ public class VirtualKeyboardView extends RelativeLayout {
         View view = View.inflate(context, R.layout.layout_virtual_keyboard, null);
 
         valueList = new ArrayList<>();
-
+        //返回按钮
         layoutBack = (RelativeLayout) view.findViewById(R.id.layoutBack);
 
         gridView = (GridView) view.findViewById(R.id.gv_keybord);

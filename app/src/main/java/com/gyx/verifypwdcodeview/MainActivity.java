@@ -47,10 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		btGetpwd = (Button) findViewById(R.id.bt_getpwd);
 		btGetpwd.setOnClickListener(this);
 
-
-
 		virtualKeyboardView = (VirtualKeyboardView) findViewById(R.id.virtualKeyboardView);
-
+		//
 		valueList = virtualKeyboardView.getValueList();
 
 		//是否是阿拉伯输入格式
@@ -71,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				e.printStackTrace();
 			}
 		}
+		//虚拟键盘
 		virtualKeyboardView.getLayoutBack().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -78,8 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				virtualKeyboardView.setVisibility(View.GONE);
 			}
 		});
+		//表格布局
 		GridView gridView = virtualKeyboardView.getGridView();
+		//键盘点击
 		gridView.setOnItemClickListener(onItemClickListener);
+		//密码点击
 		password.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -95,27 +97,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-			//博主手机不好，经常点一次却触发两次`onKey`事件，就设置了一个防止多点击，间隔100毫秒。
-			long startTime = System.currentTimeMillis();
 			String amount = password.getTextToStirng();
+			//按钮点击的不是空格按钮，也不是退格键  的时候
 			if (position < 11 && position != 9) {
 				if (6 > amount.length()) {
 					password.setText(amount + valueList.get(position).get("name"));
 				}
+
 			} else {
-				if (position == 11) {      //点击退格键
+				//点击退格键
+				if (position == 11) {
 					if (amount.length() > 0) {
 						amount = amount.substring(0, amount.length() - 1);
 						password.setText(amount);
 					}
+
 				}
 			}
 			//验证码
 			passWord = password.getTextToStirng();
-			if (6 == passWord.length()&& startTime - endTime > 100) {
-				virtualKeyboardView.startAnimation(exitAnim);
+			if (6 == passWord.length()) {
+				//这里就不用退出动画了直接gone，要不然最后一个数字狂点击按钮，会不停弹键盘
+				//virtualKeyboardView.startAnimation(exitAnim);
 				virtualKeyboardView.setVisibility(View.GONE);
-				endTime = startTime;
+
 			}
 		}
 	};

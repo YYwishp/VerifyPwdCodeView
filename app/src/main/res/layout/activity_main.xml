@@ -22,34 +22,42 @@
             android:textSize="15sp"
             />
 
+
+
+
+
+        <!-- widthSpace和 heightSpace 要配合使用，最好两个要一样，控制间距，一样的话，就是正方形-->
+        <!--
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            利用左右margin ，来控制 控件的大小
+        -->
         <com.gyx.verifypwdcodeview.VerifyPwdCodeView
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
             app:autoCloseKeyBoard="true"
-            app:bgFill="true"
             app:broderColor="#ff0f"
             app:broderWidth="1dp"
-            app:dottedColor="#00f"
-            app:isCorner="false"
-            app:isNeedDash="false"
-            app:isPwd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+
+            app:isCorner="true"
+            app:isPwd="false"
             app:numLength="6"
+            app:pwdType="CIRCLE"
+
             app:rectChooseColor="#fff"
             app:rectNormalColor="#fff"
-            app:rectStroke="1dp"
+
+
             app:textColor="#000"
             app:txtSize="20sp"
+
             app:widthSpace="0dp"
             app:heightSpace="0dp"
-
             />
 
         <LinearLayout
@@ -84,7 +92,7 @@
             android:text="登陆或注册"
             android:textColor="#fff" />
     </LinearLayout>
-
+    <!--虚拟键盘-->
     <com.lnyp.pswkeyboard.widget.VirtualKeyboardView
         android:id="@+id/virtualKeyboardView"
         android:layout_width="match_parent"
