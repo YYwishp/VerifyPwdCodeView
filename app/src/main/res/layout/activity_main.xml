@@ -36,28 +36,28 @@
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             app:autoCloseKeyBoard="true"
             app:broderColor="#ff0f"
             app:broderWidth="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
 
             app:isCorner="false"
-            app:isPwd="false"
+            app:isPwd="true"
             app:numLength="6"
             app:pwdType="CIRCLE"
 
             app:rectChooseColor="#fff"
             app:rectNormalColor="#fff"
-
+            app:isNeedDash="true"
+            app:dottedColor="#00f"
 
             app:textColor="#000"
             app:txtSize="20sp"
 
-            app:widthSpace="0dp"
-            app:heightSpace="0dp"
+            app:widthSpace="5dp"
+            app:heightSpace="5dp"
             />
 
 
@@ -94,7 +94,7 @@
             android:background="#c9590a"
             android:text="登陆或注册"
             android:textColor="#fff" />
-        <com.gyx.verifypwdcodeview.TestView
+        <!--<com.gyx.verifypwdcodeview.TestView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:borderWidth="10dp"
@@ -102,7 +102,7 @@
             app:rectangleWidth="40dp"
 
 
-            />
+            />-->
 
     </LinearLayout>
     <!--虚拟键盘-->

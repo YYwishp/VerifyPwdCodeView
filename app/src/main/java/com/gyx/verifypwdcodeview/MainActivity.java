@@ -53,22 +53,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		//是否是阿拉伯输入格式
 		password.setArCountry(false);
+
 		initAnim();
 		//设置不调用系统键盘
-		if (android.os.Build.VERSION.SDK_INT <= 10) {
-			password.setInputType(InputType.TYPE_NULL);
-		} else {
-			this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-			try {
-				Class<EditText> cls = EditText.class;
-				Method setShowSoftInputOnFocus;
-				setShowSoftInputOnFocus = cls.getMethod("setShowSoftInputOnFocus", boolean.class);
-				setShowSoftInputOnFocus.setAccessible(true);
-				setShowSoftInputOnFocus.invoke(password, false);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		//if (android.os.Build.VERSION.SDK_INT <= 10) {
+		//	password.setInputType(InputType.TYPE_NULL);
+		//} else {
+		//	this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		//	try {
+		//		Class<EditText> cls = EditText.class;
+		//		Method setShowSoftInputOnFocus;
+		//		setShowSoftInputOnFocus = cls.getMethod("setShowSoftInputOnFocus", boolean.class);
+		//		setShowSoftInputOnFocus.setAccessible(true);
+		//		setShowSoftInputOnFocus.invoke(password, false);
+		//	} catch (Exception e) {
+		//		e.printStackTrace();
+		//	}
+		//}
+
+
+
 		//虚拟键盘
 		virtualKeyboardView.getLayoutBack().setOnClickListener(new View.OnClickListener() {
 			@Override

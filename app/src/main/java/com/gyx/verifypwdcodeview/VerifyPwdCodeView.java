@@ -11,7 +11,9 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,13 @@ import java.util.List;
  * 密码输入
  * Created by gyx on 2017/11/4.
  */
-public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditText {
+public class VerifyPwdCodeView extends View {
+
+	public enum PwdType {
+		CIRCLE,
+		XINGHAO
+	}
+
 	private Paint rectPaint;
 	private Paint textPaint;
 	private Rect textRect;
@@ -103,7 +111,7 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 	private Paint dottedPaint;
 	private float borderWidth;
 	private boolean isNeedDash;
-	private onInputOverListener onInputOverListener;
+	//private onInputOverListener onInputOverListener;
 
 	public VerifyPwdCodeView(Context context) {
 		super(context);
@@ -186,14 +194,13 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 		isArCountry = arCountry;
 	}
 
-	@Override
 	public void setTextColor(int textColor) {
 		this.textColor = textColor;
 	}
 
-	public void setOnInputOverListener(onInputOverListener onInputOverListener) {
+	/*public void setOnInputOverListener(onInputOverListener onInputOverListener) {
 		this.onInputOverListener = onInputOverListener;
-	}
+	}*/
 
 	private void setAttr(AttributeSet attrs, int defStyleAttr) {
 		TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.VerifyPwdCodeView, defStyleAttr, 0);
@@ -226,7 +233,7 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 		a.recycle();
 	}
 
-	@Override
+	/*@Override
 	protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
 		super.onTextChanged(text, start, lengthBefore, lengthAfter);
 		if (this.text == null) {
@@ -248,7 +255,7 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 		if (text.toString().length() != 0) {
 			setText("");
 		}
-	}
+	}*/
 
 	public String getTextToStirng() {
 //		Editable text = super.getText();
@@ -269,11 +276,11 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 	/**
 	 * 关闭软键盘
 	 */
-	public void closeKeybord() {
+	/*public void closeKeybord() {
 		InputMethodManager imm = (InputMethodManager) getContext()
 				.getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(getWindowToken(), 0);
-	}
+	}*/
 
 	private void init() {
 		//矩形体
@@ -294,19 +301,19 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 		textRect = new Rect();
 		setBackgroundDrawable(null);
 		setLongClickable(false);
-		setTextIsSelectable(false);
-		setCursorVisible(false);
+		//setTextIsSelectable(false);
+		//setCursorVisible(false);
 	}
 
-	@Override
+	/*@Override
 	protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
 		super.onFocusChanged(focused, direction, previouslyFocusedRect);
 		isFocus = focused;
-	}
+	}*/
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		//super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 		int widthMode = MeasureSpec.getMode(widthMeasureSpec);
 		//
@@ -365,17 +372,17 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 		setMeasuredDimension(widthSize, heightSize);
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == 67 && text.length() != 0) {
-			text = text.substring(0, text.length() - 1);
-			if (onInputOverListener != null) {
-				onInputOverListener.onInputOver(this.text);
-			}
-			invalidate();
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+	//@Override
+	//public boolean onKeyDown(int keyCode, KeyEvent event) {
+	//	if (keyCode == 67 && text.length() != 0) {
+	//		text = text.substring(0, text.length() - 1);
+	//		if (onInputOverListener != null) {
+	//			onInputOverListener.onInputOver(this.text);
+	//		}
+	//		invalidate();
+	//	}
+	//	return super.onKeyDown(keyCode, event);
+	//}
 
 	//	rectPaint.setStrokeWidth(rectStroke);
 //		textPaint.setColor(textColor);
@@ -397,9 +404,13 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 //		canvas.drawText("*", list.get(text.length() - i - 1).left + (list.get(text.length() - i - 1).right - list.get(text.length() - i - 1).left) / 2 - textRect.width() / 2,
 //				list.get(i).top + ((list.get(i).bottom - list.get(i).top) / 2) + textRect.height() / 2, textPaint);
 //	}
+
+
+
+
 	@Override
 	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
+		//super.onDraw(canvas);
 		if (!isBgFill) {
 			rectPaint.setStyle(Paint.Style.STROKE);
 		}
@@ -437,11 +448,17 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 				if (widthSpace > 0) {
 					rect = new RectF(i * width + widthSpace, heightSpace, i * width + width - widthSpace, width - heightSpace);
 				} else {
-					if (i == 0) {
-						rect = new RectF((float) (i * width + borderWidth / 2.0), borderWidth , (float) (i * width + width - borderWidth / 2.0), width );
+					/*if (i == 0) {
+						rect = new RectF((float) (i * width + borderWidth / 2.0), 0 , (float) (i * width + width - borderWidth / 2.0), width );
 					} else {
+						//rect = new RectF((float) (i * (width-borderWidth)+borderWidth / 2.0), (float) (borderWidth / 2.0), (float) ((i+1) *(width-borderWidth) +borderWidth / 2.0), (float) (width - borderWidth / 2.0));
 						rect = new RectF((float) (i * (width-borderWidth)+borderWidth / 2.0), (float) (borderWidth / 2.0), (float) ((i+1) *(width-borderWidth) +borderWidth / 2.0), (float) (width - borderWidth / 2.0));
-					}
+					}*/
+
+					rect = new RectF((float) (i * (width - borderWidth)+borderWidth), borderWidth , (float)(i+1)*(width-borderWidth), width-borderWidth );
+
+
+
 				}
 
 
@@ -524,8 +541,9 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 						canvas.drawPath(path, borderPaint);*/
 					} else {
 						if (i == 0) {
-							path.moveTo((float) (i * width + borderWidth / 2.0), (float) (borderWidth/2.0));
-							path.lineTo((float) (i * width + width - borderWidth / 2.0), (float) (borderWidth /2.0));
+							System.out.println("第一次---width--" + width + "边框厚度---" + borderWidth);
+							path.moveTo((float) (i * width + borderWidth / 2.0), (float) (borderWidth / 2.0));
+							path.lineTo((float) (i * width + width - borderWidth / 2.0), (float) (borderWidth/ 2.0));
 							path.lineTo((float) (i * width + width - borderWidth / 2.0), (float) (width -borderWidth /2.0));
 							path.lineTo((float) (i * width + borderWidth / 2.0), (float) (width -borderWidth /2.0));
 							path.lineTo((float) (i * width + borderWidth / 2.0), 0);
@@ -543,20 +561,27 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 					//画出矩形的边框
 					canvas.drawPath(path, borderPaint);
 				}
-				//if (isNeedDash) {
-				//	//最后一个画虚线
-				//	if (i == text.length()) {
-				//		Path dashPath = new Path();
-				//		dashPath.moveTo(i * width + widthSpace, heightSpace);
-				//		dashPath.lineTo(i * width + width - widthSpace, heightSpace);
-				//		dashPath.lineTo(i * width + width - widthSpace, width - heightSpace);
-				//		dashPath.lineTo(i * width + widthSpace, width - heightSpace);
-				//		dashPath.lineTo(i * width + widthSpace, heightSpace);
-				//		//画虚线
-				//		dottedPaint.setPathEffect(new DashPathEffect(new float[]{8, 5}, 0));
-				//		canvas.drawPath(dashPath, dottedPaint);
-				//	}
-				//}
+
+
+
+
+
+
+				/*//用于测试使用
+				if (isNeedDash) {
+					//最后一个画虚线
+					if (i == text.length()) {
+						Path dashPath = new Path();
+						dashPath.moveTo(i * width + widthSpace, heightSpace);
+						dashPath.lineTo(i * width + width - widthSpace, heightSpace);
+						dashPath.lineTo(i * width + width - widthSpace, width - heightSpace);
+						dashPath.lineTo(i * width + widthSpace, width - heightSpace);
+						dashPath.lineTo(i * width + widthSpace, heightSpace);
+						//画虚线
+						dottedPaint.setPathEffect(new DashPathEffect(new float[]{8, 5}, 0));
+						canvas.drawPath(dashPath, dottedPaint);
+					}
+				}*/
 			}
 			//画文字
 			for (int i = 0; i < text.length(); i++) {
@@ -734,14 +759,11 @@ public class VerifyPwdCodeView extends android.support.v7.widget.AppCompatEditTe
 		}
 	}
 
-	public enum PwdType {
-		CIRCLE,
-		XINGHAO
-	}
 
-	public interface onInputOverListener {
+
+	/*public interface onInputOverListener {
 		void onInputOver(String text);
-	}
+	}*/
 }
 
 
